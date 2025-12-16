@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import TaskForm from '../components/TaskForm';
+import TaskForm from '../TaskForm';
 
 describe('TaskForm Component', () => {
   let mockOnAddTask;
@@ -38,10 +38,10 @@ describe('TaskForm Component', () => {
   });
 
   it('submits form with title and due date', async () => {
-    render(<TaskForm onAddTask={mockOnAddTask} />);
+    const { container } = render(<TaskForm onAddTask={mockOnAddTask} />);
     
     const titleInput = screen.getByPlaceholderText(/What magical task/);
-    const dateInput = screen.getByDisplayValue('');
+    const dateInput = container.querySelector('input[type="date"]');
     const submitButton = screen.getByRole('button', { name: /Add Task/ });
     
     fireEvent.change(titleInput, { target: { value: 'Task with date' } });

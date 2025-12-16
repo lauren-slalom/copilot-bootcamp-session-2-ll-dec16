@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import EditTaskModal from '../components/EditTaskModal';
+import EditTaskModal from '../EditTaskModal';
 
 describe('EditTaskModal Component', () => {
   const mockTask = {
@@ -215,11 +215,13 @@ describe('EditTaskModal Component', () => {
     const saveButton = screen.getByText(/Save Changes/);
     fireEvent.click(saveButton);
 
+    // While saving, button should show "Saving..."
     expect(screen.getByText(/Saving.../)).toBeInTheDocument();
     
+    // Wait for the save to complete
     await waitFor(() => {
-      expect(screen.getByText(/Save Changes/)).toBeInTheDocument();
-    });
+      expect(mockOnSave).toHaveBeenCalled();
+    }, { timeout: 200 });
   });
 
   it('handles task without due date', () => {

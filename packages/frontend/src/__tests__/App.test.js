@@ -36,8 +36,8 @@ const server = setupServer(
   }),
   
   // POST /api/tasks handler
-  rest.post('/api/tasks', (req, res, ctx) => {
-    const { title, due_date } = req.body;
+  rest.post('/api/tasks', async (req, res, ctx) => {
+    const { title, due_date } = await req.json();
     
     if (!title || title.trim() === '') {
       return res(
@@ -46,23 +46,28 @@ const server = setupServer(
       );
     }
     
+    const newTask = {
+      id: 3,
+      title: title.trim(),
+      due_date: due_date || null,
+      completed: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    
+    // Add to mockTasks so it appears in subsequent GET requests
+    mockTasks.push(newTask);
+    
     return res(
       ctx.status(201),
-      ctx.json({
-        id: 3,
-        title: title.trim(),
-        due_date: due_date || null,
-        completed: 0,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      })
+      ctx.json(newTask)
     );
   }),
 
   // PUT /api/tasks/:id handler
-  rest.put('/api/tasks/:id', (req, res, ctx) => {
+  rest.put('/api/tasks/:id', async (req, res, ctx) => {
     const { id } = req.params;
-    const { title, due_date } = req.body;
+    const { title, due_date } = await req.json();
     
     return res(
       ctx.status(200),
