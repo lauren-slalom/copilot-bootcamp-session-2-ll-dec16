@@ -1,0 +1,85 @@
+.task-form-container {
+  background: var(--white);
+  padding: var(--spacing-lg);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+.task-form-container h2 {
+  font-size: 24px;
+  margin-bottom: var(--spacing-md);
+  color: var(--dark-text);
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.task-input {
+  padding: 10px 14px;
+  border: 2px solid var(--lavender);
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.task-input:focus {
+  outline: none;
+  border-color: #9370DB;
+  box-shadow: 0 4px 0 0 rgba(230, 213, 245, 0.5);
+}
+
+.date-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 10px 14px;
+  border: 2px solid var(--sky-blue);
+  border-radius: 12px;
+  background: var(--white);
+  transition: all 0.2s;
+}
+
+.date-input-wrapper:focus-within {
+  border-color: #2196F3;
+  box-shadow: 0 4px 0 0 rgba(212, 228, 255, 0.5);
+}
+
+.date-icon {
+  font-size: 20px;
+}
+
+.date-input {
+  flex: 1;
+  border: none;
+  font-size: 16px;
+  outline: none;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .task-form-container {
+    padding: var(--spacing-md);
+  }
+  
+  .task-form-container h2 {
+    font-size: 20px;
+  }
+}
